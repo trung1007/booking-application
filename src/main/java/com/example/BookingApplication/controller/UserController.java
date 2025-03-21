@@ -1,6 +1,7 @@
 package com.example.BookingApplication.controller;
 
 import com.example.BookingApplication.domain.User;
+import com.example.BookingApplication.repository.UserRepository;
 import com.example.BookingApplication.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
     }
 
@@ -33,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUser(Model model, @ModelAttribute("user") User user){
-        System.out.println(user.toString());
-        return "admin/user/create";
+        this.userService.handleCreateUser(user);
+        return "hello";
     }
 }
