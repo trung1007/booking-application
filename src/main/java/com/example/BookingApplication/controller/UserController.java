@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+
 @Controller
 public class UserController {
 
@@ -20,13 +22,20 @@ public class UserController {
 
     @RequestMapping("/")
     public String getHomePage(Model model){
-        String test = this.userService.helloService("service");
-        model.addAttribute("test", test);
         return "hello";
     }
 
+
     @RequestMapping("/admin/user")
-    public String getUserPage(Model model){
+    public String getTableUser(Model model){
+        List<User> users = this.userService.getAllUsers();
+        model.addAttribute("users", users);
+        return "admin/user/table-user";
+    }
+
+
+    @RequestMapping("/admin/user/create")
+    public String getCreateUserPage(Model model){
         String test = this.userService.helloService("service");
         model.addAttribute("user", new User());
         return "admin/user/create";
@@ -35,6 +44,6 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUser(Model model, @ModelAttribute("user") User user){
         this.userService.handleCreateUser(user);
-        return "hello";
+        return "redirect:/admin/user";
     }
 }

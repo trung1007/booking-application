@@ -5,6 +5,8 @@ import com.example.BookingApplication.domain.User;
 import com.example.BookingApplication.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -16,6 +18,14 @@ public class UserService {
 
     public String helloService(String name) {
         return "Hello " + name;
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    public List<User> getUsersByEmail(String email) {
+        return this.userRepository.findByEmail(email);
     }
 
     public void handleCreateUser(User user) {
