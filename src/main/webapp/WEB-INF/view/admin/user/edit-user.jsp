@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <!DOCTYPE html>
@@ -22,10 +22,14 @@
     <div class="card p-4 shadow-lg col-10 col-md-6 col-lg-4">
         <h3 class="text-center mb-4">Edit User</h3>
 
-        <form:form method="put" action="/admin/user/${id}" modelAttribute="user">
+        <form:form method="post" action="/admin/user/update" modelAttribute="user">
+            <div class="mb-3" style="display: none">
+                <label for="id" class="form-label">Id</label>
+                <form:input type="text" class="form-control" path="id" />
+            </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <form:input type="email" class="form-control" path="email" disabled="true"/>
+                <form:input type="email" class="form-control" path="email"/>
             </div>
             <div class="mb-3">
                 <label for="fullName" class="form-label">Full Name</label>
