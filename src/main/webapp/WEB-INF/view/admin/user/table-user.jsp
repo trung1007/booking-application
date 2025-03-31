@@ -38,8 +38,8 @@
                 <td>${user.email}</td>
                 <td>${user.fullName}</td>
                 <td>
-                    <button class="btn btn-success btn">View</button>
-                    <button class="btn btn-warning btn">Edit</button>
+                    <a href="/admin/user/${user.id}" class="btn btn-success btn">View</a>
+                    <a href="/admin/user/update/${user.id}" class="btn btn-warning btn">Edit</a>
                     <button class="btn btn-danger btn">Delete</button>
                 </td>
             </tr>

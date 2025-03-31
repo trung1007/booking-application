@@ -28,6 +28,10 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
+    public User getUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
     public void handleCreateUser(User user) {
         this.userRepository.save(user);
     }
