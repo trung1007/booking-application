@@ -3,6 +3,8 @@ package com.example.BookingApplication.service;
 
 import com.example.BookingApplication.domain.User;
 import com.example.BookingApplication.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +36,13 @@ public class UserService {
 
     public void handleSaveUser(User user) {
         this.userRepository.save(user);
+    }
+    @Transactional
+    public void deleteUser(int id) {
+        if (userRepository.existsById(id)) {
+            userRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("User not found with ID: " + id);
+        }
     }
 }
