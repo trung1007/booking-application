@@ -1,22 +1,30 @@
 package com.example.BookingApplication.domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     private String email;
     private String password;
     private String fullName;
     private String phoneNumber;
     private String address;
     private int age;
+    private String avatar;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 
     public int getAge() {
         return age;
@@ -26,7 +34,7 @@ public class User {
         this.age = age;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -40,6 +48,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public String getPassword() {
@@ -83,6 +99,8 @@ public class User {
                 ", fullName='" + fullName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
+                ", age=" + age +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }
